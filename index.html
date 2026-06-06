@@ -1,57 +1,167 @@
-<body style="
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Golden 13 | Apobangpo Sanctuary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg-dark:#0b0618;
+    --bg-light:#f5f1ff;
+
+    --card-dark:rgba(255,255,255,0.05);
+    --card-light:rgba(0,0,0,0.05);
+
+    --purple:#7c3aed;
+    --gold:#d4af37;
+    --arirang:#ff4fa3;
+
+    --text-dark:#ffffff;
+    --text-light:#1a1a1a;
+}
+
+body{
     margin:0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #0b001a, #1a0033, #05010a);
-    color:white;
+    font-family:Poppins, sans-serif;
+    transition:0.4s;
+}
+
+/* THEMES */
+body.dark{
+    background:linear-gradient(180deg,#0b0618,#120022,#05010a);
+    color:var(--text-dark);
+}
+
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
+}
+
+/* HEADER */
+header{
+    padding:20px;
     text-align:center;
-">
+    font-family:"Playfair Display", serif;
+    letter-spacing:2px;
+    font-size:22px;
+}
 
-    <div style="padding:60px 20px;">
-        
-        <h1 style="
-            font-size:3rem;
-            background: linear-gradient(90deg,#b388ff,#ffd54f);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        ">
-            🌌 The Golden 13
-        </h1>
+/* CONTAINER */
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
 
-        <p style="color:#cbb6ff; font-size:1.2rem;">
-            Apobangpo Sanctuary (2013–2026)
-        </p>
+/* CARD */
+.card{
+    padding:25px;
+    margin:20px 0;
+    border-radius:18px;
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.1);
+}
 
-        <div style="
-            margin:40px auto;
-            max-width:600px;
-            padding:25px;
-            border-radius:20px;
-            background: rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-        ">
-            <p>
-                Welcome, ARMY 💜 This is your safe universe.
-            </p>
+body.dark .card{
+    background:var(--card-dark);
+}
 
-            <p>
-                A place where thoughts become comfort, and words become healing.
-            </p>
-        </div>
+body.light .card{
+    background:var(--card-light);
+}
 
-        <button style="
-            margin-top:20px;
-            padding:12px 24px;
-            border:none;
-            border-radius:30px;
-            background:#7c3aed;
-            color:white;
-            font-weight:bold;
-            cursor:pointer;
-        ">
-            Enter Sanctuary ✨
-        </button>
+/* BUTTONS */
+button{
+    padding:10px 18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
 
-    </div>
+.btn-purple{background:var(--purple); color:white;}
+.btn-gold{background:var(--gold); color:black;}
+.btn-arirang{background:var(--arirang); color:white;}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* TITLE STYLE */
+.title{
+    font-size:42px;
+    font-family:"Playfair Display", serif;
+    background:linear-gradient(90deg,var(--purple),var(--gold));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* THEME SWITCH */
+.theme-switch{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.small{
+    font-size:14px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body class="dark">
+
+<header>
+THE GOLDEN 13 — APOBANGPO SANCTUARY
+<div class="small">2013 — 2026</div>
+</header>
+
+<div class="theme-switch">
+    <button class="btn-purple" onclick="setTheme('dark')">Dark Theme</button>
+    <button class="btn-gold" onclick="setTheme('light')">Light Theme</button>
+    <button class="btn-arirang" onclick="setTheme('arirang')">Arirang Theme</button>
+</div>
+
+<div class="container">
+
+<div class="card">
+    <div class="title">Welcome to the Sanctuary</div>
+    <p>
+        A digital space built for reflection, healing, and memory.
+        Where words become comfort and silence becomes understanding.
+    </p>
+</div>
+
+<div class="card">
+    <h2>Enter the System</h2>
+    <button class="btn-purple" onclick="alert('Magic Shop will open next step')">
+        Enter Sanctuary
+    </button>
+</div>
+
+</div>
+
+<script>
+function setTheme(mode){
+    if(mode === 'dark'){
+        document.body.className = 'dark';
+    }
+    if(mode === 'light'){
+        document.body.className = 'light';
+    }
+    if(mode === 'arirang'){
+        document.body.style.background = 
+        "linear-gradient(135deg,#1a0033,#3b0a57,#ff4fa3)";
+        document.body.style.color = "white";
+    }
+}
+</script>
 
 </body>
+</html>
