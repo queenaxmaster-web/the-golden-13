@@ -157,6 +157,18 @@ THE GOLDEN 13 — APOBANGPO SANCTUARY
     <button class="btn-purple" onclick="alert('Magic Shop coming next step')">
         Enter Sanctuary
     </button>
+    <div class="card">
+    <h2>Constellation Universe</h2>
+    <p>Each ARMY is a star. Add your light to the sky.</p>
+
+    <input id="starName" placeholder="Name">
+    <input id="starCountry" placeholder="Country">
+    <input id="starBias" placeholder="Bias">
+
+    <button class="btn-purple" onclick="addStar()">Create Star</button>
+
+    <div id="starList" style="margin-top:20px;"></div>
+    </div>
 </div>
 
 </div>
@@ -176,6 +188,42 @@ function setTheme(mode){
 
     if(mode === 'arirang'){
         document.body.classList.add('arirang');
+        let stars = [];
+
+function addStar(){
+    let name = document.getElementById("starName").value;
+    let country = document.getElementById("starCountry").value;
+    let bias = document.getElementById("starBias").value;
+
+    if(!name || !country){
+        alert("Please fill name and country");
+        return;
+    }
+
+    stars.push({name, country, bias});
+    renderStars();
+
+    document.getElementById("starName").value = "";
+    document.getElementById("starCountry").value = "";
+    document.getElementById("starBias").value = "";
+}
+
+function renderStars(){
+    let box = document.getElementById("starList");
+    box.innerHTML = "";
+
+    stars.forEach(s=>{
+        box.innerHTML += `
+        <div class="card">
+            <b>${s.name}</b><br>
+            Country: ${s.country}<br>
+            Bias: ${s.bias || "Not set"}
+        </div>
+        `;
+    });
+}
+
+        
     }
 }
 </script>
