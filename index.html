@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+/* ========== BASE COLORS ========== */
 :root{
     --bg-dark:#0b0618;
     --bg-light:#f5f1ff;
@@ -17,46 +18,53 @@
 
     --purple:#7c3aed;
     --gold:#d4af37;
-    --arirang:#ff4fa3;
 
     --text-dark:#ffffff;
     --text-light:#1a1a1a;
 }
 
+/* ========== GLOBAL ========== */
 body{
     margin:0;
     font-family:Poppins, sans-serif;
     transition:0.4s;
 }
 
-/* THEMES */
+/* ========== DARK THEME (PURPLE + GOLD) ========== */
 body.dark{
     background:linear-gradient(180deg,#0b0618,#120022,#05010a);
     color:var(--text-dark);
 }
 
+/* ========== LIGHT THEME ========== */
 body.light{
     background:var(--bg-light);
     color:var(--text-light);
 }
 
-/* HEADER */
-header{
-    padding:20px;
-    text-align:center;
-    font-family:"Playfair Display", serif;
-    letter-spacing:2px;
-    font-size:22px;
+/* ========== ARIRANG THEME (RED + WHITE ONLY) ========== */
+body.arirang{
+    background:linear-gradient(135deg,#b30000,#7a0000);
+    color:#ffffff;
 }
 
-/* CONTAINER */
+/* ========== HEADER ========== */
+header{
+    text-align:center;
+    padding:20px;
+    font-family:"Playfair Display", serif;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+/* ========== CONTAINER ========== */
 .container{
     max-width:900px;
     margin:auto;
     padding:20px;
 }
 
-/* CARD */
+/* ========== CARDS ========== */
 .card{
     padding:25px;
     margin:20px 0;
@@ -73,7 +81,21 @@ body.light .card{
     background:var(--card-light);
 }
 
-/* BUTTONS */
+body.arirang .card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+}
+
+/* ========== TITLE ========== */
+.title{
+    font-size:42px;
+    font-family:"Playfair Display", serif;
+    background:linear-gradient(90deg,var(--purple),var(--gold));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* ========== BUTTONS ========== */
 button{
     padding:10px 18px;
     border-radius:30px;
@@ -85,22 +107,13 @@ button{
 
 .btn-purple{background:var(--purple); color:white;}
 .btn-gold{background:var(--gold); color:black;}
-.btn-arirang{background:var(--arirang); color:white;}
+.btn-red{background:#b30000; color:white;}
 
 button:hover{
     transform:scale(1.05);
 }
 
-/* TITLE STYLE */
-.title{
-    font-size:42px;
-    font-family:"Playfair Display", serif;
-    background:linear-gradient(90deg,var(--purple),var(--gold));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* THEME SWITCH */
+/* ========== THEME SWITCH ========== */
 .theme-switch{
     display:flex;
     justify-content:center;
@@ -123,9 +136,9 @@ THE GOLDEN 13 — APOBANGPO SANCTUARY
 </header>
 
 <div class="theme-switch">
-    <button class="btn-purple" onclick="setTheme('dark')">Dark Theme</button>
-    <button class="btn-gold" onclick="setTheme('light')">Light Theme</button>
-    <button class="btn-arirang" onclick="setTheme('arirang')">Arirang Theme</button>
+    <button class="btn-purple" onclick="setTheme('dark')">Dark</button>
+    <button class="btn-gold" onclick="setTheme('light')">Light</button>
+    <button class="btn-red" onclick="setTheme('arirang')">Arirang</button>
 </div>
 
 <div class="container">
@@ -133,32 +146,31 @@ THE GOLDEN 13 — APOBANGPO SANCTUARY
 <div class="card">
     <div class="title">Welcome to the Sanctuary</div>
     <p>
-        A digital space built for reflection, healing, and memory.
-        Where words become comfort and silence becomes understanding.
+        A digital space built for healing, reflection, and memory.
     </p>
 </div>
 
 <div class="card">
-    <h2>Enter the System</h2>
-    <button class="btn-purple" onclick="alert('Magic Shop will open next step')">
-        Enter Sanctuary
-    </button>
+    <h2>Enter the Sanctuary</h2>
+    <button class="btn-purple">Start Journey</button>
 </div>
 
 </div>
 
 <script>
 function setTheme(mode){
+    document.body.className = "";
+
     if(mode === 'dark'){
-        document.body.className = 'dark';
+        document.body.classList.add('dark');
     }
+
     if(mode === 'light'){
-        document.body.className = 'light';
+        document.body.classList.add('light');
     }
+
     if(mode === 'arirang'){
-        document.body.style.background = 
-        "linear-gradient(135deg,#1a0033,#3b0a57,#ff4fa3)";
-        document.body.style.color = "white";
+        document.body.classList.add('arirang');
     }
 }
 </script>
