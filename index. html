@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Golden 13 | Apobangpo Sanctuary</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#120020,#1a0033,#05010a);
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.card{
+max-width:800px;
+padding:40px;
+border-radius:24px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+h1{
+font-size:3rem;
+margin-bottom:15px;
+background:linear-gradient(90deg,#b388ff,#ffd54f);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+p{
+line-height:1.7;
+margin-top:10px;
+color:#ddd;
+}
+
+.creator{
+margin-top:30px;
+color:#c084fc;
+font-weight:bold;
+}
+
+.button{
+display:inline-block;
+margin-top:25px;
+padding:12px 24px;
+border-radius:999px;
+background:#7c3aed;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>THE GOLDEN 13</h1>
+
+<h2>APOBANGPO SANCTUARY 💜</h2>
+
+<p>
+ARMY Forever. Bangtan Forever.
+</p>
+
+<p>
+A fan-created sanctuary inspired by the comfort, hope,
+and healing that BTS has shared with millions around the world.
+</p>
+
+<a class="button" href="#">
+Enter The Magic Shop ✨
+</a>
+
+<div class="creator">
+Created and Designed by Vihana 💜
+</div>
+
+</div>
+
+</body>
+</html>
