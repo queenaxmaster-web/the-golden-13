@@ -1,97 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Golden 13 | Apobangpo Sanctuary</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden 13 – Apobangpo Sanctuary</title>
+    <style>
+        /* --- THEME & VARIABLES --- */
+        :root {
+            --bg-space: #0b071e;
+            --purple-glow: #6f42c1;
+            --purple-bright: #a176f2;
+            --purple-dark: #1a1235;
+            --text-main: #e2daf7;
+            --text-muted: #a59bbd;
+            --army-bomb: #dcd3ff;
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-body{
-background:linear-gradient(180deg,#120020,#1a0033,#05010a);
-color:white;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
+        body {
+            background: linear-gradient(135deg, #0b071e 0%, #160f33 50%, #080516 100%);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
 
-.card{
-max-width:800px;
-padding:40px;
-border-radius:24px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.1);
-}
+        /* --- BACKGROUND ANIMATIONS --- */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: starMovement 100s linear infinite;
+            opacity: 0.6;
+        }
 
-h1{
-font-size:3rem;
-margin-bottom:15px;
-background:linear-gradient(90deg,#b388ff,#ffd54f);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+        @keyframes starMovement {
+            from { background-position: 0 0, 40px 60px, 130px 270px; }
+            to { background-position: 550px 1100px, 440px 760px, 430px 870px; }
+        }
 
-p{
-line-height:1.7;
-margin-top:10px;
-color:#ddd;
-}
+        .nebula {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(111, 66, 193, 0.2) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: 0;
+            pointer-events: none;
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+        #nebula-1 { top: -10%; left: -10%; }
+        #nebula-2 { bottom: -10%; right: -10%; animation-delay: -10s; }
 
-.creator{
-margin-top:30px;
-color:#c084fc;
-font-weight:bold;
-}
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 50px) scale(1.2); }
+        }
 
-.button{
-display:inline-block;
-margin-top:25px;
-padding:12px 24px;
-border-radius:999px;
-background:#7c3aed;
-color:white;
-text-decoration:none;
-font-weight:bold;
-}
-</style>
+        /* --- LAYOUT & NAVIGATION --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 7, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(111, 66, 193, 0.3);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px var(--purple-bright);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s, text-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: #fff;
+            text-shadow: 0 0 8px var(--purple-bright);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem 6rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            display: none;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- GLOWING UI ELEMENTS --- */
+        .card {
+            background: rgba(26, 18, 53, 0.6);
+            border: 1px solid rgba(111, 66, 193, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(161, 118, 242, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(111, 66, 193, 0.2);
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 12px rgba(161, 118, 242, 0.4);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: rgba(11, 7, 30, 0.8);
+            border: 1px solid rgba(111, 66, 193, 0.4);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--purple-bright);
+            box-shadow: 0 0 8px rgba(161, 118, 242, 0.5);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--purple-glow), var(--purple-bright));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(161, 118, 242, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .placeholder-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #b892ff 0%, #7952b3 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 10px rgba(184, 146, 255, 0.5);
+        }
+
+        /* --- SECTION SPECIFIC STYLES --- */
+        /* Home */
+        .home-hero {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        .home-hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.2rem; color: var(--purple-bright); margin-bottom: 2rem; font-style: italic; }
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .home-card {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Magic Shop */
+        .magic-shop-output {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(11, 7, 30, 0.6);
+            border-left: 4px solid var(--purple-bright);
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+        .magic-shop-output.active { display: block; animation: fadeIn 0.4s ease; }
+
+        /* Healing Doubts */
+        .member-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .member-tab {
+            background: var(--purple-dark);
+            border: 1px solid rgba(111, 66, 193, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .member-tab.active {
+            background: var(--purple-bright);
+            color: #0b071e;
+            font-weight: bold;
+        }
+        .doubt-box {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px dashed rgba(255, 100, 100, 0.4);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .comfort-box {
+            background: rgba(100, 255, 150, 0.1);
+            border: 1px dashed rgba(100, 255, 150, 0.4);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        /* Library */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .lib-source {
+            font-size: 0.8rem;
+            color: var(--purple-bright);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Community & Post Office */
+        .feed {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 1.5rem;
+            padding-right: 0.5rem;
+        }
+        .comment-item {
+            background: rgba(11, 7, 30, 0.5);
+            border: 1px solid rgba(111, 66, 193, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+        .bomb-btn {
+            background: none;
+            box-shadow: none;
+            border: none;
+            padding: 0;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+        .bomb-btn:hover {
+            transform: scale(1.1);
+            box-shadow: none;
+            color: var(--purple-bright);
+        }
+
+        /* Constellation Room */
+        .sky-canvas {
+            width: 100%;
+            height: 350px;
+            background: radial-gradient(circle at center, #110a2b 0%, #05030f 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(111, 66, 193, 0.4);
+            cursor: crosshair;
+        }
+        .interactive-star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--purple-bright);
+            animation: pulse 1.5s infinite alternate;
+            cursor: pointer;
+        }
+        @keyframes pulse {
+            from { transform: scale(0.8); opacity: 0.6; }
+            to { transform: scale(1.3); opacity: 1; }
+        }
+        .counter-display {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: var(--purple-bright);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(111, 66, 193, 0.2);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(11, 7, 30, 0.9);
+        }
+
+        /* Responsive fixes */
+        @media(max-width: 600px) {
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+            nav ul { justify-content: center; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
+    <div class="stars-bg"></div>
+    <div class="nebula" id="nebula-1"></div>
+    <div class="nebula" id="nebula-2"></div>
 
-<h1>THE GOLDEN 13</h1>
+    <header>
+        <a class="logo" onclick="showSection('home')">The Golden 13</a>
+        <nav>
+            <ul>
+                <li><a onclick="showSection('home')" id="nav-home" class="active">Home</a></li>
+                <li><a onclick="showSection('magic-shop')" id="nav-magic-shop">Magic Shop</a></li>
+                <li><a onclick="showSection('healing-doubts')" id="nav-healing-doubts">Doubts</a></li>
+                <li><a onclick="showSection('library')" id="nav-library">Library</a></li>
+                <li><a onclick="showSection('community')" id="nav-community">ARMY Room</a></li>
+                <li><a onclick="showSection('journal')" id="nav-journal">Post Office</a></li>
+                <li><a onclick="showSection('constellation')" id="nav-constellation">Constellation</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<h2>APOBANGPO SANCTUARY 💜</h2>
+    <main>
 
-<p>
-ARMY Forever. Bangtan Forever.
-</p>
+        <section id="home" class="active-section">
+            <div class="home-hero">
+                <h1>The Golden 13</h1>
+                <div class="subtitle">Apobangpo Sanctuary (2013–2026)</div>
+                <div class="card" style="max-width: 700px; margin: 0 auto;">
+                    <div class="placeholder-avatar">🌌</div>
+                    <p>Welcome to your safe haven, ARMY. This sanctuary honors the timeless healing bond shared between BTS and our community over our beautiful journey from 2013 through 2026, and far beyond.</p>
+                    <p>Whenever you feel weary, lost, or need a moment of peace, step inside our interactive rooms designed to hold your hand, validate your feelings, and remind you of your starlight.</p>
+                </div>
+            </div>
 
-<p>
-A fan-created sanctuary inspired by the comfort, hope,
-and healing that BTS has shared with millions around the world.
-</p>
+            <div class="home-grid">
+                <div class="card home-card" onclick="showSection('magic-shop')">
+                    <h3>🔮 Magic Shop</h3>
+                    <p>Exchange your heavy emotions for comfort, music definitions, and warm words.</p>
+                </div>
+                <div class="card home-card" onclick="showSection('healing-doubts')">
+                    <h3>🤝 Healing Doubts</h3>
+                    <p>Explore the personal struggles of our seven stars and see how love fixes them.</p>
+                </div>
+                <div class="card home-card" onclick="showSection('library')">
+                    <h3>📚 Speech & Lyric Library</h3>
+                    <p>Revisit grounding quotes, logs, and interpretations that healed hearts worldwide.</p>
+                </div>
+            </div>
+        </section>
 
-<a class="button" href="#">
-Enter The Magic Shop ✨
-</a>
+        <section id="magic-shop">
+            <div class="card">
+                <h2>🔮 The Magic Shop</h2>
+                <p><i>"So show me... I'll show you."</i> Write down your worries, stress, or self-doubts below. The shop will trade them for tailored warmth inspired by BTS lyricism and timeless wisdom.</p>
+                
+                <textarea id="ms-input" rows="3" placeholder="Type what is weighing on your heart today... (e.g., 'I feel lost', 'I am so tired', 'I am worried about my future')"></textarea>
+                <button onclick="consultMagicShop()">Open Your Heart</button>
 
-<div class="creator">
-Created and Designed by Vihana 💜
-</div>
+                <div class="magic-shop-output" id="ms-output">
+                    <h3 style="color: var(--purple-bright); margin-bottom: 0.5rem;">Shop Remedy</h3>
+                    <div id="ms-analysis" style="margin-bottom: 1rem; font-style: italic; color: var(--text-muted);"></div>
+                    <div id="ms-lyric" style="margin-bottom: 1rem;"></div>
+                    <div id="ms-speech" style="margin-bottom: 1rem; border-left: 2px solid rgba(255,255,255,0.2); padding-left: 0.5rem;"></div>
+                    <div id="ms-community" style="font-weight: 500;"></div>
+                </div>
+            </div>
+        </section>
 
-</div>
+        <section id="healing-doubts">
+            <div class="card">
+                <h2>🤝 Healing Doubts</h2>
+                <p>Even the brightest stars encounter dark clouds. Select a member below to see how their real, expressed vulnerabilities are met with comforting ARMY responses.</p>
+                
+                <div class="member-tabs" id="member-tabs-container">
+                    </div>
 
-</body>
-</html>
+                <div class="card" style="background: rgba(11, 7, 30, 0.4); border-color: rgba(161, 118, 242, 0.2);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="placeholder-avatar" id="doubt-avatar" style="margin-bottom:0;">💜</div>
+                        <h3 id="doubt-member-name" style="margin: 0;">Member</h3>
+                    </div>
+                    
+                    <div class="doubt-box">
+                        <strong>Their Vulnerability/Insecurity:</strong>
+                        <p id="doubt-text" style="margin: 0; margin-top: 0.5rem;"></p>
+                    </div>
+
+                    <div class="comfort-box">
+                        <strong>ARMY Comforting Answer:</strong>
+                        <p id="comfort-text" style="margin: 0; margin-top: 0.5rem;"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="library">
+            <h2>📚 Comfort Library</h2>
+            <p style="margin-bottom: 2rem;">A curated space holding paraphrased meanings of healing records and landmarks.</p>
+            
+            <div class="library-grid">
+                <div class="card">
+                    <h3>Spring Day (Remedy Theory)</h3>
+                    <p>No winter lasts forever. The song acts as an emotional timeline showing that seasons change, pain passes, and the morning will always arrive again.</p>
+                    <div class="lib-source">Source: Track Interpretation</div>
+                </div>
+                <div class="card">
+                    <h3>RM: UN General Assembly 2018</h3>
+                    <p>No matter who you are, where you're from, your skin color, your gender identity: speak yourself. Find your name and find your voice by speaking yourself.</p>
+                    <div class="lib-source">Source: Speech Reference</div>
+                </div>
+                <div class="card">
+                    <h3>Magic Shop (Trading Pain)</h3>
+                    <p>An internal mental sanctuary where you can temporarily leave your fears at the door and trade them for hope, shared through empathetic melody lines.</p>
+                    <div class="lib-source">Source: Track Interpretation</div>
+                </div>
+                <div class="card">
+                    <h3>Jin: Epiphany Revelation</h3>
+                    <p>Realizing that despite imperfections, the ultimate responsibility we have in this life is to embrace, shelter, and love the self completely.</p>
+                    <div class="lib-source">Source: Track Interpretation</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community">
+            <div class="card">
+                <h2>💣 ARMY Community Room</h2>
+                <p>Leave a message of encouragement for another ARMY visiting tonight. Tap the ARMY Bomb icon to cheer for each other!</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" id="comm-username" placeholder="Your Pseudonym / Name">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); align-self: center;">Spreading pure purple love.</div>
+                </div>
+                <textarea id="comm-text" rows="2" placeholder="Write a comfortable reminder..."></textarea>
+                <button onclick="addComment()">Broadcast Love</button>
+
+                <div class="feed" id="comm-feed">
+                    </div>
+            </div>
+        </section>
+
+        <section id="journal">
+            <div class="card">
+               
