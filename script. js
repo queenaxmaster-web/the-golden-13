@@ -1,0 +1,22 @@
+function switchPage(pageId) {
+    // 1. Hide all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // 2. Show the clicked page
+    const selectedPage = document.getElementById(pageId);
+    if (selectedPage) {
+        selectedPage.classList.add('active');
+    }
+
+    // 3. Update active state on buttons visually
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Add active highlight to clicked button
+    event.currentTarget.classList.add('active');
+}
