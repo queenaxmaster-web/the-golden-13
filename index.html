@@ -1,232 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Golden 13 | Apobangpo Sanctuary</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --bg-dark:#0b0618;
-    --bg-light:#f5f1ff;
-
-    --card-dark:rgba(255,255,255,0.05);
-    --card-light:rgba(0,0,0,0.05);
-
-    --purple:#7c3aed;
-    --gold:#d4af37;
-
-    --text-dark:#ffffff;
-    --text-light:#1a1a1a;
-}
-
-/* GLOBAL */
-body{
-    margin:0;
-    font-family:Poppins, sans-serif;
-    transition:0.4s;
-}
-
-/* DARK */
-body.dark{
-    background:linear-gradient(180deg,#0b0618,#120022,#05010a);
-    color:var(--text-dark);
-}
-
-/* LIGHT */
-body.light{
-    background:var(--bg-light);
-    color:var(--text-light);
-}
-
-/* ARIRANG (FIXED CLEAN SYSTEM) */
-body.arirang{
-    background:linear-gradient(135deg,#1a0033,#3b0a57,#ff4fa3);
-    color:white;
-}
-
-body.arirang .card{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.2);
-}
-
-/* HEADER */
-header{
-    padding:20px;
-    text-align:center;
-    font-family:"Playfair Display", serif;
-    letter-spacing:2px;
-    font-size:22px;
-}
-
-/* CONTAINER */
-.container{
-    max-width:900px;
-    margin:auto;
-    padding:20px;
-}
-
-/* CARD */
-.card{
-    padding:25px;
-    margin:20px 0;
-    border-radius:18px;
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.1);
-}
-
-body.dark .card{
-    background:var(--card-dark);
-}
-
-body.light .card{
-    background:var(--card-light);
-}
-
-/* BUTTONS */
-button{
-    padding:10px 18px;
-    border-radius:30px;
-    border:none;
-    cursor:pointer;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.btn-purple{background:var(--purple); color:white;}
-.btn-gold{background:var(--gold); color:black;}
-.btn-arirang{background:#ff4fa3; color:white;}
-
-button:hover{
-    transform:scale(1.05);
-}
-
-/* TITLE */
-.title{
-    font-size:42px;
-    font-family:"Playfair Display", serif;
-    background:linear-gradient(90deg,var(--purple),var(--gold));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* THEME SWITCH */
-.theme-switch{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:15px;
-}
-
-.small{
-    font-size:14px;
-    opacity:0.8;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constellation Universe</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<body>
 
-<body class="dark">
+    <main id="app-content">
+        <section id="constellation" class="page active">
+            <h2>🌌 Constellation Universe</h2>
+            <p>Welcome to the global sky. Stars are aligning...</p>
+            <div class="mock-map">✨ [Interactive Map Will Go Here] ✨</div>
+        </section>
 
-<header>
-THE GOLDEN 13 — APOBANGPO SANCTUARY
-<div class="small">2013 — 2026</div>
-</header>
+        <section id="magic-shop" class="page">
+            <h2>🔮 Magic Shop</h2>
+            <p>Enter your feelings, receive comfort.</p>
+            <input type="text" placeholder="How are you feeling today, ARMY?">
+            <button>Enter</button>
+        </section>
 
-<div class="theme-switch">
-    <button class="btn-purple" onclick="setTheme('dark')">Dark Theme</button>
-    <button class="btn-gold" onclick="setTheme('light')">Light Theme</button>
-    <button class="btn-arirang" onclick="setTheme('arirang')">Arirang Theme</button>
-</div>
+        <section id="army-space" class="page">
+            <h2>💬 ARMY Space</h2>
+            <p>Real-time community feed.</p>
+            <div class="mock-feed">
+                <p><strong>@RM_Monstar:</strong> Welcome to our universe! 💜</p>
+            </div>
+        </section>
+    </main>
 
-<div class="container">
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchPage('constellation')">🌌 Sky</button>
+        <button class="nav-btn" onclick="switchPage('magic-shop')">🔮 Shop</button>
+        <button class="nav-btn" onclick="switchPage('army-space')">💬 Space</button>
+    </nav>
 
-<div class="card">
-    <div class="title">Welcome to the Sanctuary</div>
-    <p>
-        A digital space built for reflection, healing, and memory.
-        Where words become comfort and silence becomes understanding.
-    </p>
-</div>
-
-<div class="card">
-    <h2>Enter the System</h2>
-    <button class="btn-purple" onclick="alert('Magic Shop coming next step')">
-        Enter Sanctuary
-    </button>
-    <div class="card">
-    <h2>Constellation Universe</h2>
-    <p>Each ARMY is a star. Add your light to the sky.</p>
-
-    <input id="starName" placeholder="Name">
-    <input id="starCountry" placeholder="Country">
-    <input id="starBias" placeholder="Bias">
-
-    <button class="btn-purple" onclick="addStar()">Create Star</button>
-
-    <div id="starList" style="margin-top:20px;"></div>
-    </div>
-</div>
-
-</div>
-
-<script>
-function setTheme(mode){
-
-    document.body.className = "";
-
-    if(mode === 'dark'){
-        document.body.classList.add('dark');
-    }
-
-    if(mode === 'light'){
-        document.body.classList.add('light');
-    }
-
-    if(mode === 'arirang'){
-        document.body.classList.add('arirang');
-        let stars = [];
-
-function addStar(){
-    let name = document.getElementById("starName").value;
-    let country = document.getElementById("starCountry").value;
-    let bias = document.getElementById("starBias").value;
-
-    if(!name || !country){
-        alert("Please fill name and country");
-        return;
-    }
-
-    stars.push({name, country, bias});
-    renderStars();
-
-    document.getElementById("starName").value = "";
-    document.getElementById("starCountry").value = "";
-    document.getElementById("starBias").value = "";
-}
-
-function renderStars(){
-    let box = document.getElementById("starList");
-    box.innerHTML = "";
-
-    stars.forEach(s=>{
-        box.innerHTML += `
-        <div class="card">
-            <b>${s.name}</b><br>
-            Country: ${s.country}<br>
-            Bias: ${s.bias || "Not set"}
-        </div>
-        `;
-    });
-}
-
-        
-    }
-}
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
